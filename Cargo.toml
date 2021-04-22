@@ -12,6 +12,7 @@ scraper = "0.12.0"
 thiserror = "1.0.24"
 lazy_static = "1.4.0"
 serde = {version = "1.0.125", features = ["serde_derive"]}
+trigram = "0.4.4"
 
 [dev-dependencies]
 tokio = {version = "1.5.0", features = ["macros", "rt-multi-thread"]}
