@@ -10,17 +10,27 @@ pub async fn search(query: &str) -> XKCDResult<Vec<(String, u32)>> {
         .into_iter()
         .map(|s| s.to_lowercase())
         .collect();
-    let entries = archive
+    let mut entries: Vec<(usize, String, u32)> = archive
         .into_iter()
-        .filter(|(key, _)| {
-            words
+        .filter_map(|(key, id)| {
+            let score = words
                 .iter()
-                .find(|w| key.to_lowercase().contains(*w))
-                .is_some()
+                .filter(|w| key.to_lowercase().contains(*w))
+                .count();
+            if score <= 0 {
+                None
+            } else {
+                Some((score, key, id))
+            }
         })
         .collect();
+    entries.sort_by_key(|(s, _, _)| *s);
+    entries.reverse();
 
-    Ok(entries)
+    Ok(entries
+        .into_iter()
+        .map(|(_, title, id)| (title, id))
+        .collect())
 }
 
 /// Searches for a comic with a fuzzy compare function that assigns a score
