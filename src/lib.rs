@@ -1,6 +1,6 @@
 mod archive;
 mod comic;
-mod error;
+pub mod error;
 
 mod search;
 #[cfg(test)]

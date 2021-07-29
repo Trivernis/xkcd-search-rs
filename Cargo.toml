@@ -1,6 +1,6 @@
 [package]
 name = "xkcd-search"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["trivernis <trivernis@protonmail.com>"]
 edition = "2018"
 readme = "README.md"
@@ -20,3 +20,6 @@ trigram = "0.4.4"
 
 [dev-dependencies]
 tokio = {version = "1.5.0", features = ["macros", "rt-multi-thread"]}
+
+[features]
+rustls = ["reqwest/rustls"]
